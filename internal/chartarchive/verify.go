@@ -42,14 +42,14 @@ func VerifyArchive(ctx context.Context, path string) (*VerifyResult, error) {
 	if err != nil {
 		return nil, err
 	}
-	if meta["ktl_archive_type"] != archiveType {
-		return nil, fmt.Errorf("unexpected archive type %q (want %q)", meta["ktl_archive_type"], archiveType)
+	if meta["verifier_archive_type"] != archiveType {
+		return nil, fmt.Errorf("unexpected archive type %q (want %q)", meta["verifier_archive_type"], archiveType)
 	}
-	if meta["ktl_archive_version"] != archiveVersion {
-		return nil, fmt.Errorf("unexpected archive version %q (want %q)", meta["ktl_archive_version"], archiveVersion)
+	if meta["verifier_archive_version"] != archiveVersion {
+		return nil, fmt.Errorf("unexpected archive version %q (want %q)", meta["verifier_archive_version"], archiveVersion)
 	}
 
-	rows, err := db.QueryContext(ctx, `SELECT path, sha256, size, data FROM ktl_chart_files ORDER BY path ASC`)
+	rows, err := db.QueryContext(ctx, `SELECT path, sha256, size, data FROM verifier_chart_files ORDER BY path ASC`)
 	if err != nil {
 		return nil, fmt.Errorf("read chart files: %w", err)
 	}
@@ -101,7 +101,7 @@ func VerifyArchive(ctx context.Context, path string) (*VerifyResult, error) {
 }
 
 func readMeta(ctx context.Context, db *sql.DB) (map[string]string, error) {
-	rows, err := db.QueryContext(ctx, `SELECT key, value FROM ktl_archive_meta`)
+	rows, err := db.QueryContext(ctx, `SELECT key, value FROM verifier_archive_meta`)
 	if err != nil {
 		return nil, fmt.Errorf("read archive meta: %w", err)
 	}

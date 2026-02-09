@@ -142,7 +142,7 @@ func loadAttestDirFiles(attestDir string) ([]string, error) {
 }
 
 func tryReadExternalFetches(attestDir string) json.RawMessage {
-	path := filepath.Join(strings.TrimSpace(attestDir), "ktl-external-fetches.json")
+	path := filepath.Join(strings.TrimSpace(attestDir), "verifier-external-fetches.json")
 	raw, err := os.ReadFile(path)
 	if err != nil {
 		return nil

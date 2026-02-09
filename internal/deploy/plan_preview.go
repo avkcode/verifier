@@ -26,7 +26,7 @@ func GeneratePlanPreview(ctx context.Context, actionCfg *action.Configuration, s
 	}
 
 	if planServer && preview != nil && preview.Release != nil && preview.PlanSummary != nil {
-		hints, hintErr := DetectServerSideReplaceKeys(ctx, kubeClient, preview.Release.Manifest, ServerPlanOptions{FieldManager: "ktl-plan", Force: true})
+		hints, hintErr := DetectServerSideReplaceKeys(ctx, kubeClient, preview.Release.Manifest, ServerPlanOptions{FieldManager: "verifier-plan", Force: true})
 		// We ignore the error here as it's an enhancement, similar to the original CLI logic which only logged it.
 		// If strict error handling is needed, we could return it.
 		_ = hintErr

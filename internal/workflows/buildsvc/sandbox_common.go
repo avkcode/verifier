@@ -11,18 +11,18 @@ import (
 )
 
 const (
-	sandboxActiveEnvKey        = "KTL_SANDBOX_ACTIVE"
-	legacySandboxActiveEnvKey  = "KTL_NSJAIL_ACTIVE"
-	sandboxLogPathEnvKey       = "KTL_SANDBOX_LOG_PATH"
-	legacySandboxLogPathEnv    = "KTL_NSJAIL_LOG_PATH"
-	sandboxDisableEnvKey       = "KTL_SANDBOX_DISABLE"
-	legacySandboxDisableEnv    = "KTL_NSJAIL_DISABLE"
-	sandboxContextEnvKey       = "KTL_SANDBOX_CONTEXT"
-	legacySandboxContextEnvKey = "KTL_NSJAIL_CONTEXT"
-	sandboxCacheEnvKey         = "KTL_SANDBOX_CACHE"
-	legacySandboxCacheEnvKey   = "KTL_NSJAIL_CACHE"
-	sandboxBuilderEnvKey       = "KTL_SANDBOX_BUILDER"
-	legacySandboxBuilderEnvKey = "KTL_NSJAIL_BUILDER"
+	sandboxActiveEnvKey        = "VERIFIER_SANDBOX_ACTIVE"
+	legacySandboxActiveEnvKey  = "VERIFIER_NSJAIL_ACTIVE"
+	sandboxLogPathEnvKey       = "VERIFIER_SANDBOX_LOG_PATH"
+	legacySandboxLogPathEnv    = "VERIFIER_NSJAIL_LOG_PATH"
+	sandboxDisableEnvKey       = "VERIFIER_SANDBOX_DISABLE"
+	legacySandboxDisableEnv    = "VERIFIER_NSJAIL_DISABLE"
+	sandboxContextEnvKey       = "VERIFIER_SANDBOX_CONTEXT"
+	legacySandboxContextEnvKey = "VERIFIER_NSJAIL_CONTEXT"
+	sandboxCacheEnvKey         = "VERIFIER_SANDBOX_CACHE"
+	legacySandboxCacheEnvKey   = "VERIFIER_NSJAIL_CACHE"
+	sandboxBuilderEnvKey       = "VERIFIER_SANDBOX_BUILDER"
+	legacySandboxBuilderEnvKey = "VERIFIER_NSJAIL_BUILDER"
 )
 
 type sandboxInjector func(ctx context.Context, opts *Options, streams Streams, contextAbs string) (bool, error)

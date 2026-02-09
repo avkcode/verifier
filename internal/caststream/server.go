@@ -1,9 +1,9 @@
 // File: internal/caststream/server.go
 // Brief: Internal caststream package implementation for 'server'.
 
-// Package caststream hosts lightweight remote streaming servers used by ktl.
-// It can expose log streams over WebSocket (e.g. `ktl logs --ws-listen`) and
-// render the deploy viewer HTML shell used by `ktl apply --ui` / `ktl delete --ui`.
+// Package caststream hosts lightweight remote streaming servers used by verifier.
+// It can expose log streams over WebSocket (e.g. `verifier logs --ws-listen`) and
+// render the deploy viewer HTML shell used by `verifier apply --ui` / `verifier delete --ui`.
 package caststream
 
 import (
@@ -50,7 +50,7 @@ func WithDeployUI() Option {
 	}
 }
 
-// Server exposes a lightweight HTML + WebSocket view of ktl streams.
+// Server exposes a lightweight HTML + WebSocket view of verifier streams.
 type Server struct {
 	addr           string
 	mode           Mode

@@ -12,14 +12,14 @@ import (
 	"strings"
 	"time"
 
-	apiv1 "verifier/pkg/api/ktl/api/v1"
+	apiv1 "verifier/pkg/api/verifier/api/v1"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 	"google.golang.org/protobuf/encoding/protojson"
 	"google.golang.org/protobuf/proto"
 )
 
-const httpAuthCookieName = "ktl_token"
+const httpAuthCookieName = "verifier_token"
 
 func newHTTPGateway(token string, mirror *MirrorServer) http.Handler {
 	mux := http.NewServeMux()
@@ -580,7 +580,7 @@ func allowCORS(w http.ResponseWriter, r *http.Request) bool {
 	// Default to permissive CORS for local dev UIs; real deployments should prefer
 	// a reverse proxy that applies tighter CORS rules.
 	w.Header().Set("Access-Control-Allow-Origin", "*")
-	w.Header().Set("Access-Control-Allow-Headers", "authorization,x-ktl-token,last-event-id,content-type")
+	w.Header().Set("Access-Control-Allow-Headers", "authorization,x-verifier-token,last-event-id,content-type")
 	w.Header().Set("Access-Control-Allow-Methods", "GET,POST,DELETE,OPTIONS")
 	if r.Method == http.MethodOptions {
 		w.WriteHeader(http.StatusNoContent)

@@ -56,11 +56,11 @@ func NewBuilderManager(kubeClient kubernetes.Interface, restConfig *rest.Config,
 
 // ProvisionEphemeralBuilder creates a pod, waits for it, port-forwards, and returns the address.
 func (m *BuilderManager) ProvisionEphemeralBuilder(ctx context.Context) (string, func(), error) {
-	podName := "ktl-builder"
+	podName := "verifier-builder"
 	klog.Infof("Provisioning/Reusing remote builder pod: %s/%s", m.namespace, podName)
 
 	// Ensure PVC for caching
-	pvcName := "ktl-builder-cache"
+	pvcName := "verifier-builder-cache"
 	useCache := false
 	if err := m.ensurePVC(ctx, pvcName); err != nil {
 		klog.Warningf("Failed to ensure cache PVC, proceeding without cache: %v", err)
@@ -98,8 +98,8 @@ func (m *BuilderManager) ProvisionEphemeralBuilder(ctx context.Context) (string,
 				Name:      podName,
 				Namespace: m.namespace,
 				Labels: map[string]string{
-					"app.kubernetes.io/name":       "ktl-builder",
-					"app.kubernetes.io/managed-by": "ktl",
+					"app.kubernetes.io/name":       "verifier-builder",
+					"app.kubernetes.io/managed-by": "verifier",
 				},
 			},
 			Spec: corev1.PodSpec{
@@ -351,8 +351,8 @@ func (m *BuilderManager) ensurePVC(ctx context.Context, name string) error {
 			Name:      name,
 			Namespace: m.namespace,
 			Labels: map[string]string{
-				"app.kubernetes.io/name":       "ktl-builder",
-				"app.kubernetes.io/managed-by": "ktl",
+				"app.kubernetes.io/name":       "verifier-builder",
+				"app.kubernetes.io/managed-by": "verifier",
 			},
 		},
 		Spec: corev1.PersistentVolumeClaimSpec{

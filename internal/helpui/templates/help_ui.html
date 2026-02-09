@@ -423,13 +423,13 @@
       const elChips = Array.from(document.querySelectorAll("[data-kind]"));
 
       const curated = [
-        { id: "cmd:ktl init", title: "ktl init", sub: "Bootstrap a repo config quickly" },
-        { id: "cmd:ktl apply", title: "ktl apply", sub: "Deploy a chart to a cluster" },
-        { id: "cmd:ktl logs", title: "ktl logs", sub: "Tail pods fast with filtering" },
-        { id: "cmd:ktl build", title: "ktl build", sub: "Build images with BuildKit workflows" },
-        { id: "cmd:ktl apply plan", title: "ktl apply plan", sub: "Preview a Helm upgrade safely" },
-        { id: "cmd:ktl delete", title: "ktl delete", sub: "Remove a release with a viewer" },
-        { id: "cmd:ktl env", title: "ktl env", sub: "Environment variables reference" },
+        { id: "cmd:verifier init", title: "verifier init", sub: "Bootstrap a repo config quickly" },
+        { id: "cmd:verifier apply", title: "verifier apply", sub: "Deploy a chart to a cluster" },
+        { id: "cmd:verifier logs", title: "verifier logs", sub: "Tail pods fast with filtering" },
+        { id: "cmd:verifier build", title: "verifier build", sub: "Build images with BuildKit workflows" },
+        { id: "cmd:verifier apply plan", title: "verifier apply plan", sub: "Preview a Helm upgrade safely" },
+        { id: "cmd:verifier delete", title: "verifier delete", sub: "Remove a release with a viewer" },
+        { id: "cmd:verifier env", title: "verifier env", sub: "Environment variables reference" },
       ];
 
       function norm(s) { return (s || "").toLowerCase(); }
@@ -446,7 +446,7 @@
           q = q.replace(m[0], " ").trim();
         } else if (q.includes("--")) {
           kind = "flag";
-        } else if (q.toUpperCase().includes("KTL_")) {
+        } else if (q.toUpperCase().includes("VERIFIER_")) {
           kind = "env";
         }
         return { q, kind };

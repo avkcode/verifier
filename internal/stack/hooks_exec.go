@@ -499,10 +499,10 @@ func buildHookEnv(hc hookRunContext, hook HookSpec) []string {
 	stackCommand = strings.TrimSpace(hc.opts.Command)
 
 	env = append(env,
-		"KTL_STACK_ROOT="+stackRoot,
-		"KTL_STACK_PROFILE="+stackProfile,
-		"KTL_STACK_RUN_ID="+runID,
-		"KTL_STACK_COMMAND="+stackCommand,
+		"VERIFIER_STACK_ROOT="+stackRoot,
+		"VERIFIER_STACK_PROFILE="+stackProfile,
+		"VERIFIER_STACK_RUN_ID="+runID,
+		"VERIFIER_STACK_COMMAND="+stackCommand,
 	)
 	kc, kctx := effectiveKubeContext(hc, hook)
 	if kc != "" {
@@ -514,11 +514,11 @@ func buildHookEnv(hc hookRunContext, hook HookSpec) []string {
 
 	if hc.node != nil {
 		env = append(env,
-			"KTL_RELEASE_ID="+hc.node.ID,
-			"KTL_RELEASE_NAME="+hc.node.Name,
-			"KTL_RELEASE_DIR="+hc.node.Dir,
-			"KTL_RELEASE_NAMESPACE="+hc.node.Namespace,
-			"KTL_CLUSTER_NAME="+hc.node.Cluster.Name,
+			"VERIFIER_RELEASE_ID="+hc.node.ID,
+			"VERIFIER_RELEASE_NAME="+hc.node.Name,
+			"VERIFIER_RELEASE_DIR="+hc.node.Dir,
+			"VERIFIER_RELEASE_NAMESPACE="+hc.node.Namespace,
+			"VERIFIER_CLUSTER_NAME="+hc.node.Cluster.Name,
 		)
 	}
 

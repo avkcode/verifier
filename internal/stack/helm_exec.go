@@ -101,7 +101,7 @@ func (e *helmExecutor) RunNode(ctx context.Context, node *runNode, command strin
 		settings.SetNamespace(node.Namespace)
 	}
 
-	helmDebug := strings.TrimSpace(os.Getenv("KTL_STACK_HELM_DEBUG")) == "1"
+	helmDebug := strings.TrimSpace(os.Getenv("VERIFIER_STACK_HELM_DEBUG")) == "1"
 	helmLogEnabled := e.helmLogs || helmDebug
 	settings.Debug = helmLogEnabled
 

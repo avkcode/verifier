@@ -508,7 +508,7 @@ func loadComposeProject(opts ComposeBuildOptions) (*composetypes.Project, error)
 func defaultProjectName(workingDir string) string {
 	base := filepath.Base(strings.TrimSpace(workingDir))
 	if base == "" || base == "." || base == string(filepath.Separator) {
-		base = "ktl"
+		base = "verifier"
 	}
 	base = strings.ToLower(base)
 	var b strings.Builder
@@ -527,11 +527,11 @@ func defaultProjectName(workingDir string) string {
 	}
 	out := b.String()
 	if out == "" {
-		return "ktl"
+		return "verifier"
 	}
 	first := out[0]
 	if (first < 'a' || first > 'z') && (first < '0' || first > '9') {
-		return "ktl-" + out
+		return "verifier-" + out
 	}
 	return out
 }
@@ -674,7 +674,7 @@ func composeTags(project *composetypes.Project, service string, cfg composetypes
 		if projectName == "" {
 			projectName = filepath.Base(project.WorkingDir)
 		}
-		fallback := fmt.Sprintf("ktl.local/%s-%s:dev", sanitizeName(projectName), sanitizeName(service))
+		fallback := fmt.Sprintf("verifier.local/%s-%s:dev", sanitizeName(projectName), sanitizeName(service))
 		tags = append(tags, fallback)
 	}
 	return tags

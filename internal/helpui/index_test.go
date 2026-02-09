@@ -7,9 +7,9 @@ import (
 )
 
 func TestBuildIndex_IncludesCommandsFlagsAndEnv(t *testing.T) {
-	root := &cobra.Command{Use: "ktl"}
+	root := &cobra.Command{Use: "verifier"}
 	root.PersistentFlags().String("log-level", "info", "Log level")
-	apply := &cobra.Command{Use: "apply", Short: "Apply chart", Example: "ktl apply --chart ./chart --release foo"}
+	apply := &cobra.Command{Use: "apply", Short: "Apply chart", Example: "verifier apply --chart ./chart --release foo"}
 	apply.Flags().StringP("namespace", "n", "", "Namespace to deploy into")
 	root.AddCommand(apply)
 
@@ -29,9 +29,9 @@ func TestBuildIndex_IncludesCommandsFlagsAndEnv(t *testing.T) {
 		}
 		t.Fatalf("expected %s entry with title %q", kind, contains)
 	}
-	assertHas("command", "ktl")
-	assertHas("command", "ktl apply")
-	assertHas("env", "KTL_CONFIG")
+	assertHas("command", "verifier")
+	assertHas("command", "verifier apply")
+	assertHas("env", "VERIFIER_CONFIG")
 
 	foundFlag := false
 	for _, e := range index.Entries {
@@ -46,7 +46,7 @@ func TestBuildIndex_IncludesCommandsFlagsAndEnv(t *testing.T) {
 }
 
 func TestBuildIndex_DeduplicatesGlobalFlags(t *testing.T) {
-	root := &cobra.Command{Use: "ktl"}
+	root := &cobra.Command{Use: "verifier"}
 	root.PersistentFlags().String("mirror-bus", "", "Publish mirror payloads to a shared gRPC bus")
 	a := &cobra.Command{Use: "a"}
 	a.Flags().String("foo", "", "Foo")

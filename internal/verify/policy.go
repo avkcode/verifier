@@ -38,7 +38,7 @@ func EvaluatePolicy(ctx context.Context, opts PolicyOptions, objects []map[strin
 		WhenUTC:  now(),
 		Context:  "verify",
 		External: raw,
-	}, "data.ktl.verify")
+	}, "data.verifier.verify")
 	if err != nil {
 		return nil, err
 	}

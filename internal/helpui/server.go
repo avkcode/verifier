@@ -82,7 +82,7 @@ type templateData struct {
 
 func (s *Server) handleIndex(w http.ResponseWriter, _ *http.Request) {
 	w.Header().Set("Content-Type", "text/html; charset=utf-8")
-	title := "ktl help"
+	title := "verifier help"
 	if s != nil && s.root != nil {
 		title = strings.TrimSpace(s.root.Name()) + " help"
 	}
@@ -93,7 +93,7 @@ func (s *Server) handleIndex(w http.ResponseWriter, _ *http.Request) {
 	all := s.all
 	ver := strings.TrimSpace(version.Get().Version)
 	if ver != "" {
-		ver = "ktl " + ver
+		ver = "verifier " + ver
 	}
 	var buf bytes.Buffer
 	_ = s.template.Execute(&buf, templateData{Title: template.HTMLEscapeString(title), All: all, Version: template.HTMLEscapeString(ver)})

@@ -8,7 +8,7 @@ import (
 
 	"verifier/internal/grpcutil"
 	"verifier/internal/workflows/buildsvc"
-	apiv1 "verifier/pkg/api/ktl/api/v1"
+	apiv1 "verifier/pkg/api/verifier/api/v1"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/credentials/insecure"

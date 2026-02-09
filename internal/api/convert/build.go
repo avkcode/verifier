@@ -10,7 +10,7 @@ import (
 	"strings"
 
 	"verifier/internal/workflows/buildsvc"
-	apiv1 "verifier/pkg/api/ktl/api/v1"
+	apiv1 "verifier/pkg/api/verifier/api/v1"
 )
 
 // BuildOptionsToProto converts build options into a protobuf payload.

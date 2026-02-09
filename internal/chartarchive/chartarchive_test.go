@@ -59,7 +59,7 @@ appVersion: "1.0.0"
 	t.Cleanup(func() { _ = db.Close() })
 
 	var archiveType string
-	if err := db.QueryRow(`SELECT value FROM ktl_archive_meta WHERE key = 'ktl_archive_type'`).Scan(&archiveType); err != nil {
+	if err := db.QueryRow(`SELECT value FROM verifier_archive_meta WHERE key = 'verifier_archive_type'`).Scan(&archiveType); err != nil {
 		t.Fatalf("read archive type: %v", err)
 	}
 	if archiveType != "chart" {
@@ -67,7 +67,7 @@ appVersion: "1.0.0"
 	}
 
 	var chartName string
-	if err := db.QueryRow(`SELECT value FROM ktl_archive_meta WHERE key = 'chart_name'`).Scan(&chartName); err != nil {
+	if err := db.QueryRow(`SELECT value FROM verifier_archive_meta WHERE key = 'chart_name'`).Scan(&chartName); err != nil {
 		t.Fatalf("read chart name: %v", err)
 	}
 	if chartName != "demo" {
@@ -75,7 +75,7 @@ appVersion: "1.0.0"
 	}
 
 	var chartDirMeta string
-	if err := db.QueryRow(`SELECT value FROM ktl_archive_meta WHERE key = 'chart_dir'`).Scan(&chartDirMeta); err != nil {
+	if err := db.QueryRow(`SELECT value FROM verifier_archive_meta WHERE key = 'chart_dir'`).Scan(&chartDirMeta); err != nil {
 		t.Fatalf("read chart_dir: %v", err)
 	}
 	if chartDirMeta == "" {
@@ -83,7 +83,7 @@ appVersion: "1.0.0"
 	}
 
 	var contentSHA string
-	if err := db.QueryRow(`SELECT value FROM ktl_archive_meta WHERE key = 'content_sha256'`).Scan(&contentSHA); err != nil {
+	if err := db.QueryRow(`SELECT value FROM verifier_archive_meta WHERE key = 'content_sha256'`).Scan(&contentSHA); err != nil {
 		t.Fatalf("read content_sha256: %v", err)
 	}
 	if contentSHA == "" {
@@ -91,7 +91,7 @@ appVersion: "1.0.0"
 	}
 
 	var count int
-	if err := db.QueryRow(`SELECT COUNT(1) FROM ktl_chart_files`).Scan(&count); err != nil {
+	if err := db.QueryRow(`SELECT COUNT(1) FROM verifier_chart_files`).Scan(&count); err != nil {
 		t.Fatalf("count files: %v", err)
 	}
 	if count == 0 {
@@ -99,7 +99,7 @@ appVersion: "1.0.0"
 	}
 
 	var secretCount int
-	if err := db.QueryRow(`SELECT COUNT(1) FROM ktl_chart_files WHERE path = 'secret.txt'`).Scan(&secretCount); err != nil {
+	if err := db.QueryRow(`SELECT COUNT(1) FROM verifier_chart_files WHERE path = 'secret.txt'`).Scan(&secretCount); err != nil {
 		t.Fatalf("query secret: %v", err)
 	}
 	if secretCount != 0 {

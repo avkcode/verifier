@@ -4,7 +4,7 @@ import (
 	"context"
 
 	"verifier/internal/version"
-	apiv1 "verifier/pkg/api/ktl/api/v1"
+	apiv1 "verifier/pkg/api/verifier/api/v1"
 )
 
 type infoService struct {

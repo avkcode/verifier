@@ -45,7 +45,7 @@ func BuildStackDiffSummary(ctx context.Context, p *Plan, defaultKubeconfig strin
 		return nil, fmt.Errorf("plan is nil")
 	}
 	out := &StackDiffSummary{
-		APIVersion: "ktl.dev/stack-diff-summary/v1",
+		APIVersion: "verifier.dev/stack-diff-summary/v1",
 		PlanHash:   strings.TrimSpace(planHash),
 		Nodes:      map[string]NodeDiffSummary{},
 	}
@@ -174,7 +174,7 @@ func WriteStackPlanBundle(outPath string, planJSON []byte, attestationJSON []byt
 	if outPath == "" {
 		return "", fmt.Errorf("bundle output path is required")
 	}
-	tmp, err := os.MkdirTemp("", "ktl-stack-plan-bundle-*")
+	tmp, err := os.MkdirTemp("", "verifier-stack-plan-bundle-*")
 	if err != nil {
 		return "", err
 	}

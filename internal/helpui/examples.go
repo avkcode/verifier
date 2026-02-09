@@ -3,116 +3,116 @@ package helpui
 // curatedExamples supplements Cobra's .Example fields with task-based golden paths.
 // Keys are Cobra command paths (CommandPath()).
 var curatedExamples = map[string][]string{
-	"ktl logs": {
-		"# Tail pods matching a regex in a namespace\nktl logs 'checkout-.*' -n prod-payments",
-		"# Highlight errors\nktl logs 'checkout-.*' -n prod-payments --highlight ERROR",
+	"verifier logs": {
+		"# Tail pods matching a regex in a namespace\nverifier logs 'checkout-.*' -n prod-payments",
+		"# Highlight errors\nverifier logs 'checkout-.*' -n prod-payments --highlight ERROR",
 	},
-	"ktl init": {
-		"# Create a repo-local .ktl.yaml\nktl init",
-		"# Preview the config without writing\nktl init --dry-run",
-		"# Run the interactive wizard\nktl init --interactive",
-		"# Use an opinionated preset\nktl init --preset prod",
-		"# Apply a built-in template\nktl init --template platform",
-		"# Apply a template from a URL\nktl init --template https://example.com/ktl-init.yaml",
-		"# Merge defaults into an existing config\nktl init --merge",
-		"# Scaffold chart/ and values/ plus gitignore\nktl init --layout --gitignore",
-		"# Scaffold Vault-backed secrets\nktl init --secrets-provider vault",
-		"# Emit JSON for automation\nktl init --output json --dry-run",
-		"# Write a replayable init plan\nktl init --plan --plan-output .ktl/init-plan.json",
-		"# Apply a saved init plan\nktl init --apply-plan .ktl/init-plan.json",
-		"# Initialize another path\nktl init ./services/api",
-		"# Overwrite existing config\nktl init --force",
+	"verifier init": {
+		"# Create a repo-local .verifier.yaml\nverifier init",
+		"# Preview the config without writing\nverifier init --dry-run",
+		"# Run the interactive wizard\nverifier init --interactive",
+		"# Use an opinionated preset\nverifier init --preset prod",
+		"# Apply a built-in template\nverifier init --template platform",
+		"# Apply a template from a URL\nverifier init --template https://example.com/verifier-init.yaml",
+		"# Merge defaults into an existing config\nverifier init --merge",
+		"# Scaffold chart/ and values/ plus gitignore\nverifier init --layout --gitignore",
+		"# Scaffold Vault-backed secrets\nverifier init --secrets-provider vault",
+		"# Emit JSON for automation\nverifier init --output json --dry-run",
+		"# Write a replayable init plan\nverifier init --plan --plan-output .verifier/init-plan.json",
+		"# Apply a saved init plan\nverifier init --apply-plan .verifier/init-plan.json",
+		"# Initialize another path\nverifier init ./services/api",
+		"# Overwrite existing config\nverifier init --force",
 	},
-	"ktl build": {
-		"# Build an image from a directory\nktl build --context . --tag ghcr.io/acme/app:dev",
-		"# Share the build stream over WebSocket\nktl build --context . --ws-listen :9085",
+	"verifier build": {
+		"# Build an image from a directory\nverifier build --context . --tag ghcr.io/acme/app:dev",
+		"# Share the build stream over WebSocket\nverifier build --context . --ws-listen :9085",
 	},
-	"ktl help": {
-		"# Launch the interactive help UI\nktl help --ui",
-		"# Show help for a specific command\nktl help apply",
+	"verifier help": {
+		"# Launch the interactive help UI\nverifier help --ui",
+		"# Show help for a specific command\nverifier help apply",
 	},
-	"ktl apply plan": {
-		"# Preview a Helm upgrade\nktl apply plan --chart ./chart --release foo -n default",
-		"# Render a shareable HTML visualization\nktl apply plan --visualize --chart ./chart --release foo -n default",
-		"# Preview with secret references\nktl apply plan --chart ./chart --release foo -n default --secret-provider local",
-		"# Preview with Vault-backed secrets\nktl apply plan --chart ./chart --release foo -n default --secret-provider vault",
-		"# Compare against a saved baseline\nktl apply plan --chart ./chart --release foo -n default --compare-to ./plan.json",
-		"# Write a baseline snapshot\nktl apply plan --chart ./chart --release foo -n default --baseline ./plan.json",
+	"verifier apply plan": {
+		"# Preview a Helm upgrade\nverifier apply plan --chart ./chart --release foo -n default",
+		"# Render a shareable HTML visualization\nverifier apply plan --visualize --chart ./chart --release foo -n default",
+		"# Preview with secret references\nverifier apply plan --chart ./chart --release foo -n default --secret-provider local",
+		"# Preview with Vault-backed secrets\nverifier apply plan --chart ./chart --release foo -n default --secret-provider vault",
+		"# Compare against a saved baseline\nverifier apply plan --chart ./chart --release foo -n default --compare-to ./plan.json",
+		"# Write a baseline snapshot\nverifier apply plan --chart ./chart --release foo -n default --baseline ./plan.json",
 	},
-	"ktl apply": {
-		"# Deploy a chart\nktl apply --chart ./chart --release foo -n default",
-		"# Run the deploy viewer\nktl apply --chart ./chart --release foo -n default --ui",
-		"# Deploy with secret references\nktl apply --chart ./chart --release foo -n default --secret-provider local",
-		"# Deploy with Vault-backed secrets\nktl apply --chart ./chart --release foo -n default --secret-provider vault",
+	"verifier apply": {
+		"# Deploy a chart\nverifier apply --chart ./chart --release foo -n default",
+		"# Run the deploy viewer\nverifier apply --chart ./chart --release foo -n default --ui",
+		"# Deploy with secret references\nverifier apply --chart ./chart --release foo -n default --secret-provider local",
+		"# Deploy with Vault-backed secrets\nverifier apply --chart ./chart --release foo -n default --secret-provider vault",
 	},
-	"ktl delete": {
-		"# Delete a release\nktl delete --release foo -n default",
-		"# Run the destroy viewer\nktl delete --release foo -n default --ui",
+	"verifier delete": {
+		"# Delete a release\nverifier delete --release foo -n default",
+		"# Run the destroy viewer\nverifier delete --release foo -n default --ui",
 	},
-	"ktl revert": {
-		"# Revert a release to the last known-good revision\nktl revert --release foo -n default",
+	"verifier revert": {
+		"# Revert a release to the last known-good revision\nverifier revert --release foo -n default",
 	},
-	"ktl env": {
-		"# Show env var reference (machine-readable)\nktl env --format json",
+	"verifier env": {
+		"# Show env var reference (machine-readable)\nverifier env --format json",
 	},
-	"ktl secrets": {
-		"# Validate a secret reference\nktl secrets test --secret-provider vault --ref secret://vault/app/db#password",
-		"# List secrets under a provider prefix\nktl secrets list --secret-provider local --path app --format json",
-		"# Discover secret refs across the repo\nktl secrets discover --scope repo",
-		"# Discover secret refs for a chart\nktl secrets discover --scope chart --chart ./chart --values values/dev.yaml",
-		"# Discover secret refs for a stack\nktl secrets discover --scope stack --config ./stacks/prod",
+	"verifier secrets": {
+		"# Validate a secret reference\nverifier secrets test --secret-provider vault --ref secret://vault/app/db#password",
+		"# List secrets under a provider prefix\nverifier secrets list --secret-provider local --path app --format json",
+		"# Discover secret refs across the repo\nverifier secrets discover --scope repo",
+		"# Discover secret refs for a chart\nverifier secrets discover --scope chart --chart ./chart --values values/dev.yaml",
+		"# Discover secret refs for a stack\nverifier secrets discover --scope stack --config ./stacks/prod",
 	},
-	"ktl version": {
-		"# Print version information\nktl version",
+	"verifier version": {
+		"# Print version information\nverifier version",
 	},
-	"ktl stack": {
-		"# Plan the stack (default: read-only, like `ktl stack plan`)\nktl stack --config ./stacks/prod",
-		"# Restrict selection via environment defaults\nKTL_STACK_TAG=critical KTL_STACK_CLUSTER=prod-us ktl stack --config ./stacks/prod",
-		"# Emit a machine-readable plan for tooling\nktl stack --config ./stacks/prod --output json",
+	"verifier stack": {
+		"# Plan the stack (default: read-only, like `verifier stack plan`)\nverifier stack --config ./stacks/prod",
+		"# Restrict selection via environment defaults\nVERIFIER_STACK_TAG=critical VERIFIER_STACK_CLUSTER=prod-us verifier stack --config ./stacks/prod",
+		"# Emit a machine-readable plan for tooling\nverifier stack --config ./stacks/prod --output json",
 	},
-	"ktl stack plan": {
-		"# Write a reproducible plan bundle for review/CI\nktl stack plan --config ./stacks/prod --bundle ./stack-plan.tgz",
-		"# Embed a live diff summary in the bundle (requires cluster access)\nktl stack plan --config ./stacks/prod --bundle ./stack-plan.tgz --bundle-diff-summary",
+	"verifier stack plan": {
+		"# Write a reproducible plan bundle for review/CI\nverifier stack plan --config ./stacks/prod --bundle ./stack-plan.tgz",
+		"# Embed a live diff summary in the bundle (requires cluster access)\nverifier stack plan --config ./stacks/prod --bundle ./stack-plan.tgz --bundle-diff-summary",
 	},
-	"ktl stack graph": {
-		"# Render a Graphviz DOT graph\nktl stack graph --config ./stacks/prod > stack.dot",
-		"# Render a Mermaid graph\nktl stack graph --config ./stacks/prod --format mermaid > stack.mmd",
+	"verifier stack graph": {
+		"# Render a Graphviz DOT graph\nverifier stack graph --config ./stacks/prod > stack.dot",
+		"# Render a Mermaid graph\nverifier stack graph --config ./stacks/prod --format mermaid > stack.mmd",
 	},
-	"ktl stack explain": {
-		"# Explain why a release is selected (by name)\nktl stack explain --config ./stacks/prod api",
-		"# Print only selection reasons\nktl stack explain --config ./stacks/prod api --why",
+	"verifier stack explain": {
+		"# Explain why a release is selected (by name)\nverifier stack explain --config ./stacks/prod api",
+		"# Print only selection reasons\nverifier stack explain --config ./stacks/prod api --why",
 	},
-	"ktl stack apply": {
-		"# Apply the selected releases (DAG order)\nktl stack apply --config ./stacks/prod --yes",
-		"# Resume the most recent run (uses stored frozen plan unless --replan is set)\nktl stack apply --config ./stacks/prod --resume --yes",
-		"# Enable manifest diffs (defaulted via env)\nKTL_STACK_APPLY_DIFF=1 ktl stack apply --config ./stacks/prod --yes",
-		"# Apply with secret references\nktl stack apply --config ./stacks/prod --secret-provider vault --yes",
+	"verifier stack apply": {
+		"# Apply the selected releases (DAG order)\nverifier stack apply --config ./stacks/prod --yes",
+		"# Resume the most recent run (uses stored frozen plan unless --replan is set)\nverifier stack apply --config ./stacks/prod --resume --yes",
+		"# Enable manifest diffs (defaulted via env)\nVERIFIER_STACK_APPLY_DIFF=1 verifier stack apply --config ./stacks/prod --yes",
+		"# Apply with secret references\nverifier stack apply --config ./stacks/prod --secret-provider vault --yes",
 	},
-	"ktl stack delete": {
-		"# Delete the selected releases (reverse DAG order)\nktl stack delete --config ./stacks/prod --yes",
-		"# Prompt only when deleting 50+ releases\nktl stack delete --config ./stacks/prod --delete-confirm-threshold 50",
+	"verifier stack delete": {
+		"# Delete the selected releases (reverse DAG order)\nverifier stack delete --config ./stacks/prod --yes",
+		"# Prompt only when deleting 50+ releases\nverifier stack delete --config ./stacks/prod --delete-confirm-threshold 50",
 	},
-	"ktl stack status": {
-		"# Tail the most recent run\nktl stack status --config ./stacks/prod --follow",
-		"# Show a specific run ID (see `ktl stack runs`)\nktl stack status --config ./stacks/prod --run-id 2025-12-30T12-34-56.000000000Z --follow",
+	"verifier stack status": {
+		"# Tail the most recent run\nverifier stack status --config ./stacks/prod --follow",
+		"# Show a specific run ID (see `verifier stack runs`)\nverifier stack status --config ./stacks/prod --run-id 2025-12-30T12-34-56.000000000Z --follow",
 	},
-	"ktl stack runs": {
-		"# List recent runs\nktl stack runs --config ./stacks/prod --limit 50",
+	"verifier stack runs": {
+		"# List recent runs\nverifier stack runs --config ./stacks/prod --limit 50",
 	},
-	"ktl stack audit": {
-		"# Show audit table for the most recent run\nktl stack audit --config ./stacks/prod",
-		"# Export a shareable HTML report\nktl stack audit --config ./stacks/prod --output html > stack-audit.html",
+	"verifier stack audit": {
+		"# Show audit table for the most recent run\nverifier stack audit --config ./stacks/prod",
+		"# Export a shareable HTML report\nverifier stack audit --config ./stacks/prod --output html > stack-audit.html",
 	},
-	"ktl stack export": {
-		"# Export the most recent run as a portable bundle\nktl stack export --config ./stacks/prod",
-		"# Export a specific run ID\nktl stack export --config ./stacks/prod --run-id 2025-12-30T12-34-56.000000000Z --out ./exports/run.tgz",
+	"verifier stack export": {
+		"# Export the most recent run as a portable bundle\nverifier stack export --config ./stacks/prod",
+		"# Export a specific run ID\nverifier stack export --config ./stacks/prod --run-id 2025-12-30T12-34-56.000000000Z --out ./exports/run.tgz",
 	},
-	"ktl stack seal": {
-		"# Seal a plan directory for CI (includes inputs bundle by default)\nktl stack seal --config ./stacks/prod --out ./.ktl/stack/sealed --command apply",
-		"# Seal without bundling inputs\nktl stack seal --config ./stacks/prod --out ./.ktl/stack/sealed --bundle=false --command apply",
+	"verifier stack seal": {
+		"# Seal a plan directory for CI (includes inputs bundle by default)\nverifier stack seal --config ./stacks/prod --out ./.verifier/stack/sealed --command apply",
+		"# Seal without bundling inputs\nverifier stack seal --config ./stacks/prod --out ./.verifier/stack/sealed --bundle=false --command apply",
 	},
-	"ktl stack rerun-failed": {
-		"# Resume the most recent run and schedule only failed nodes\nktl stack rerun-failed --config ./stacks/prod --yes",
+	"verifier stack rerun-failed": {
+		"# Resume the most recent run and schedule only failed nodes\nverifier stack rerun-failed --config ./stacks/prod --yes",
 	},
 	"verify": {
 		"# Verify a chart render (inline)\nverify --chart ./chart --release foo -n default",

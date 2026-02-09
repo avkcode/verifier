@@ -3,15 +3,15 @@ package helpui
 import "strings"
 
 var commandOwners = map[string][]string{
-	"ktl apply":      {"internal/deploy", "internal/ui"},
-	"ktl apply plan": {"internal/deploy", "internal/ui"},
-	"ktl build":      {"internal/workflows/buildsvc"},
-	"ktl delete":     {"internal/deploy", "internal/ui"},
-	"ktl init":       {"internal/appconfig"},
-	"ktl help":       {"internal/helpui"},
-	"ktl logs":       {"internal/tailer"},
-	"ktl secrets":    {"internal/secretstore"},
-	"ktl stack":      {"internal/stack"},
+	"verifier apply":      {"internal/deploy", "internal/ui"},
+	"verifier apply plan": {"internal/deploy", "internal/ui"},
+	"verifier build":      {"internal/workflows/buildsvc"},
+	"verifier delete":     {"internal/deploy", "internal/ui"},
+	"verifier init":       {"internal/appconfig"},
+	"verifier help":       {"internal/helpui"},
+	"verifier logs":       {"internal/tailer"},
+	"verifier secrets":    {"internal/secretstore"},
+	"verifier stack":      {"internal/stack"},
 }
 
 func ownersForCommand(path string) []string {

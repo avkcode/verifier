@@ -15,7 +15,7 @@ import (
 	"github.com/moby/buildkit/client"
 )
 
-const dockerFallbackBuilderName = "ktl-buildkit"
+const dockerFallbackBuilderName = "verifier-buildkit"
 
 var dockerLookPath = exec.LookPath
 var dockerBuildxRunner = runDockerBuildxImpl

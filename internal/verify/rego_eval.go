@@ -61,7 +61,7 @@ func EvaluateRulesWithSelectors(ctx context.Context, rules Ruleset, objects []ma
 		ruleInfos := eligible
 
 		// Resource-level suppression:
-		// - ktl.verify/ignore: "*" or comma/space-separated rule ids (e.g. "k8s/pss_restricted_profile")
+		// - verifier.verify/ignore: "*" or comma/space-separated rule ids (e.g. "k8s/pss_restricted_profile")
 		// This is checked per rule so users can suppress one noisy rule without disabling verify.
 		filteredByIgnore := ruleInfos[:0]
 		for _, info := range ruleInfos {
@@ -206,7 +206,7 @@ func buildEvidenceWithExtras(obj map[string]any, fieldPath string, result map[st
 		return ev
 	}
 	// Bundle rules can attach structured metadata to improve UX.
-	if v, ok := result["ktlChecksFailed"]; ok && v != nil {
+	if v, ok := result["verifierChecksFailed"]; ok && v != nil {
 		switch typed := v.(type) {
 		case []string:
 			ev["checksFailed"] = typed
@@ -225,7 +225,7 @@ func buildEvidenceWithExtras(obj map[string]any, fieldPath string, result map[st
 			ev["checksFailed"] = fmt.Sprintf("%v", v)
 		}
 	}
-	if v, ok := result["ktlContainerFailures"]; ok && v != nil {
+	if v, ok := result["verifierContainerFailures"]; ok && v != nil {
 		ev["containerFailures"] = v
 	}
 	return ev
@@ -249,10 +249,10 @@ func buildInputDocs(infos []objectInfo) ([]map[string]any, map[string]objectInfo
 	for i, info := range infos {
 		docID := fmt.Sprintf("doc-%d", i+1)
 		obj := info.obj
-		ktl := map[string]any{}
+		verifier := map[string]any{}
 		if len(info.annotations) > 0 {
-			if raw := strings.TrimSpace(info.annotations["ktl.verify/ignore-checks"]); raw != "" {
-				ktl["ignoreChecks"] = splitCSV(raw)
+			if raw := strings.TrimSpace(info.annotations["verifier.verify/ignore-checks"]); raw != "" {
+				verifier["ignoreChecks"] = splitCSV(raw)
 			}
 		}
 		doc := map[string]any{
@@ -260,7 +260,7 @@ func buildInputDocs(infos []objectInfo) ([]map[string]any, map[string]objectInfo
 			"kind":     obj["kind"],
 			"metadata": obj["metadata"],
 			"spec":     obj["spec"],
-			"ktl":      ktl,
+			"verifier":      verifier,
 		}
 		// Some queries expect arbitrary keys under the document; keep the full object too.
 		for k, v := range obj {
@@ -290,7 +290,7 @@ func shouldIgnoreRule(info objectInfo, ruleID string) bool {
 	if len(info.annotations) == 0 {
 		return false
 	}
-	raw := strings.TrimSpace(info.annotations["ktl.verify/ignore"])
+	raw := strings.TrimSpace(info.annotations["verifier.verify/ignore"])
 	if raw == "" {
 		return false
 	}

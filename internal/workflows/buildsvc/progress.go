@@ -35,7 +35,7 @@ type buildProgressBroadcaster struct {
 func newBuildProgressBroadcaster(label string) *buildProgressBroadcaster {
 	label = strings.TrimSpace(label)
 	if label == "" {
-		label = "ktl-build"
+		label = "verifier-build"
 	}
 	return &buildProgressBroadcaster{
 		label:    label,

@@ -32,7 +32,7 @@ func DetectServerSideReplaceKeys(ctx context.Context, client *kube.Client, propo
 		return map[string]bool{}, nil
 	}
 	if strings.TrimSpace(opts.FieldManager) == "" {
-		opts.FieldManager = "ktl-plan"
+		opts.FieldManager = "verifier-plan"
 	}
 
 	objs, err := parseManifestObjects(proposedManifest)

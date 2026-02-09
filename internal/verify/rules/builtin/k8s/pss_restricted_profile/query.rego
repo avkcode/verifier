@@ -17,8 +17,8 @@ is_unconfined(t) {
 }
 
 ignore_check(document, code) {
-  ktl := object.get(document, "ktl", {})
-  list := object.get(ktl, "ignoreChecks", [])
+  verifier := object.get(document, "verifier", {})
+  list := object.get(verifier, "ignoreChecks", [])
   some i
   lower(list[i]) == lower(code)
 }
@@ -157,7 +157,7 @@ CxPolicy[result] {
     "keyExpectedValue": "restricted profile requirements met",
     "keyActualValue": msg,
     "searchLine": common_lib.build_search_line(split(specInfo.path, "."), []),
-    "ktlChecksFailed": checks
+    "verifierChecksFailed": checks
   }
 }
 

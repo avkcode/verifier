@@ -1,5 +1,5 @@
 // File: internal/stack/print_runs.go
-// Brief: Human-friendly printing for `ktl stack runs`.
+// Brief: Human-friendly printing for `verifier stack runs`.
 
 package stack
 

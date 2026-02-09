@@ -50,7 +50,7 @@ metadata:
 	}
 
 	// Event is present => fail.
-	addEvent("KtlVerifyDemo", now.Add(-30*time.Second))
+	addEvent("VerifierVerifyDemo", now.Add(-30*time.Second))
 	_, err = verifyKubeRelease(context.Background(), client, ns, release, manifest, VerifyOptions{
 		Enabled:        boolPtr(true),
 		FailOnWarnings: boolPtr(true),

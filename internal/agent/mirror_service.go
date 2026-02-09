@@ -13,7 +13,7 @@ import (
 	"sync"
 	"time"
 
-	apiv1 "verifier/pkg/api/ktl/api/v1"
+	apiv1 "verifier/pkg/api/verifier/api/v1"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 	"google.golang.org/protobuf/encoding/protojson"

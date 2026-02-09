@@ -6,7 +6,7 @@ import (
 	"strings"
 	"time"
 
-	ktldocs "verifier/docs"
+	verifierdocs "verifier/docs"
 	"verifier/internal/envcatalog"
 	"github.com/spf13/cobra"
 	"github.com/spf13/pflag"
@@ -170,7 +170,7 @@ func BuildIndex(root *cobra.Command, includeHidden bool) Index {
 		})
 	}
 
-	if md := strings.TrimSpace(ktldocs.ArchitectureMD); md != "" {
+	if md := strings.TrimSpace(verifierdocs.ArchitectureMD); md != "" {
 		entries = append(entries, Entry{
 			ID:       "doc:architecture",
 			Kind:     "doc",
@@ -181,7 +181,7 @@ func BuildIndex(root *cobra.Command, includeHidden bool) Index {
 		})
 	}
 
-	if md := strings.TrimSpace(ktldocs.DepsMD); md != "" {
+	if md := strings.TrimSpace(verifierdocs.DepsMD); md != "" {
 		entries = append(entries, Entry{
 			ID:       "doc:deps",
 			Kind:     "doc",
@@ -192,7 +192,7 @@ func BuildIndex(root *cobra.Command, includeHidden bool) Index {
 		})
 	}
 
-	if md := strings.TrimSpace(ktldocs.ConfigAtlasMD); md != "" {
+	if md := strings.TrimSpace(verifierdocs.ConfigAtlasMD); md != "" {
 		entries = append(entries, Entry{
 			ID:       "doc:config-atlas",
 			Kind:     "doc",
@@ -203,7 +203,7 @@ func BuildIndex(root *cobra.Command, includeHidden bool) Index {
 		})
 	}
 
-	if md := strings.TrimSpace(ktldocs.RecipesMD); md != "" {
+	if md := strings.TrimSpace(verifierdocs.RecipesMD); md != "" {
 		entries = append(entries, Entry{
 			ID:       "doc:recipes",
 			Kind:     "doc",
@@ -214,7 +214,7 @@ func BuildIndex(root *cobra.Command, includeHidden bool) Index {
 		})
 	}
 
-	if md := strings.TrimSpace(ktldocs.TroubleshootingMD); md != "" {
+	if md := strings.TrimSpace(verifierdocs.TroubleshootingMD); md != "" {
 		entries = append(entries, Entry{
 			ID:       "doc:troubleshooting",
 			Kind:     "doc",
@@ -225,7 +225,7 @@ func BuildIndex(root *cobra.Command, includeHidden bool) Index {
 		})
 	}
 
-	if md := strings.TrimSpace(ktldocs.RecipesMD); md != "" {
+	if md := strings.TrimSpace(verifierdocs.RecipesMD); md != "" {
 		entries = append(entries, Entry{
 			ID:       "doc:recipes",
 			Kind:     "doc",
@@ -236,7 +236,7 @@ func BuildIndex(root *cobra.Command, includeHidden bool) Index {
 		})
 	}
 
-	if md := strings.TrimSpace(ktldocs.TroubleshootingMD); md != "" {
+	if md := strings.TrimSpace(verifierdocs.TroubleshootingMD); md != "" {
 		entries = append(entries, Entry{
 			ID:       "doc:troubleshooting",
 			Kind:     "doc",

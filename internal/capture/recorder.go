@@ -103,15 +103,15 @@ func Open(path string, meta SessionMeta) (*Recorder, error) {
 	db.SetMaxOpenConns(1)
 	db.SetMaxIdleConns(1)
 
-	queueSize := envInt("KTL_CAPTURE_QUEUE_SIZE", 4096)
+	queueSize := envInt("VERIFIER_CAPTURE_QUEUE_SIZE", 4096)
 	if queueSize < 128 {
 		queueSize = 128
 	}
-	batchSize := envInt("KTL_CAPTURE_BATCH_SIZE", 256)
+	batchSize := envInt("VERIFIER_CAPTURE_BATCH_SIZE", 256)
 	if batchSize < 16 {
 		batchSize = 16
 	}
-	flushMS := envInt("KTL_CAPTURE_FLUSH_MS", 250)
+	flushMS := envInt("VERIFIER_CAPTURE_FLUSH_MS", 250)
 	if flushMS < 25 {
 		flushMS = 25
 	}
@@ -173,7 +173,7 @@ func (r *Recorder) Close() error {
 	defer cancel()
 	ended := r.now()
 	_, _ = r.db.ExecContext(ctx, `
-UPDATE ktl_capture_sessions
+UPDATE verifier_capture_sessions
 SET ended_at = ?, ended_at_ns = ?, dropped_events = ?
 WHERE session_id = ?
 `, ended.Format(time.RFC3339Nano), ended.UnixNano(), atomic.LoadUint64(&r.dropped), r.sessionID)
@@ -220,7 +220,7 @@ func (r *Recorder) RecordArtifact(ctx context.Context, name, text string) error 
 	seq := r.nextSeq()
 	return r.enqueue(ctx, func(ctx context.Context, tx *sql.Tx) error {
 		_, err := tx.ExecContext(ctx, `
-INSERT INTO ktl_capture_artifacts(session_id, seq, ts, ts_ns, name, text)
+INSERT INTO verifier_capture_artifacts(session_id, seq, ts, ts_ns, name, text)
 VALUES(?, ?, ?, ?, ?, ?)
 `, r.sessionID, seq, now.Format(time.RFC3339Nano), now.UnixNano(), name, text)
 		return err
@@ -244,7 +244,7 @@ func (r *Recorder) RecordLog(ctx context.Context, rec tailer.LogRecord) error {
 	}
 	return r.enqueue(ctx, func(ctx context.Context, tx *sql.Tx) error {
 		_, err := tx.ExecContext(ctx, `
-INSERT INTO ktl_capture_events(
+INSERT INTO verifier_capture_events(
   session_id, seq, ts, ts_ns, kind,
   level, source, namespace, pod, container,
   message, payload_type, payload_blob, payload_json
@@ -287,7 +287,7 @@ func (r *Recorder) RecordDeployEvent(ctx context.Context, evt deploy.StreamEvent
 	namespace := eventNamespace(evt)
 	return r.enqueue(ctx, func(ctx context.Context, tx *sql.Tx) error {
 		_, err := tx.ExecContext(ctx, `
-INSERT INTO ktl_capture_events(
+INSERT INTO verifier_capture_events(
   session_id, seq, ts, ts_ns, kind,
   level, source, namespace, pod, container,
   message, payload_type, payload_blob, payload_json
@@ -326,7 +326,7 @@ func (r *Recorder) RecordSelection(ctx context.Context, sel tailer.SelectionSnap
 	}
 	return r.enqueue(ctx, func(ctx context.Context, tx *sql.Tx) error {
 		_, err := tx.ExecContext(ctx, `
-INSERT INTO ktl_capture_events(
+INSERT INTO verifier_capture_events(
   session_id, seq, ts, ts_ns, kind,
   level, source, namespace, pod, container,
   message, payload_type, payload_blob, payload_json
@@ -472,7 +472,7 @@ func (r *Recorder) startSession(ctx context.Context, meta SessionMeta) error {
 	}
 	start := meta.StartedAt.UTC()
 	if _, err := r.db.ExecContext(ctx, `
-INSERT INTO ktl_capture_sessions(
+INSERT INTO verifier_capture_sessions(
   session_id, run_id, parent_run_id,
   command, meta_json,
   started_at, started_at_ns,
@@ -516,7 +516,7 @@ VALUES(?, ?, ?, ?, ?, ?, ?, NULL, NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 0)
 				continue
 			}
 			if _, err := tx.ExecContext(ctx, `
-INSERT INTO ktl_capture_tags(session_id, key, value)
+INSERT INTO verifier_capture_tags(session_id, key, value)
 VALUES(?, ?, ?)
 ON CONFLICT(session_id, key) DO UPDATE SET value = excluded.value
 `, id, k, v); err != nil {

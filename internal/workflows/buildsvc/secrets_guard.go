@@ -249,7 +249,7 @@ func loadComposeProjectForSecrets(opts Options) (*composetypes.Project, error) {
 	workingDir := filepath.Dir(opts.ComposeFiles[0])
 	projectName := strings.TrimSpace(opts.ComposeProject)
 	if projectName == "" {
-		projectName = "ktl"
+		projectName = "verifier"
 	}
 	details := composetypes.ConfigDetails{
 		WorkingDir:  workingDir,

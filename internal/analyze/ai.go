@@ -33,7 +33,7 @@ func NewAIAnalyzer(provider, model string) *AIAnalyzer {
 
 	// Fallback to env var if model not provided via CLI
 	if a.Model == "" {
-		a.Model = os.Getenv("KTL_AI_MODEL")
+		a.Model = os.Getenv("VERIFIER_AI_MODEL")
 	}
 
 	switch provider {

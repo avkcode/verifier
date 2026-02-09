@@ -89,7 +89,7 @@ func (s Streams) IsTerminal(w io.Writer) bool {
 	return false
 }
 
-// Options contains everything needed to execute a ktl build workflow.
+// Options contains everything needed to execute a verifier build workflow.
 type Options struct {
 	ContextDir         string
 	Dockerfile         string

@@ -19,7 +19,7 @@ import (
 
 	"verifier/internal/api/convert"
 	"verifier/internal/tailer"
-	apiv1 "verifier/pkg/api/ktl/api/v1"
+	apiv1 "verifier/pkg/api/verifier/api/v1"
 )
 
 // Publisher streams log records to the central mirror bus.

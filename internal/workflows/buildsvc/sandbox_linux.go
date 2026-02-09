@@ -88,8 +88,8 @@ func maybeReexecInSandbox(ctx context.Context, opts *Options, streams Streams, c
 	_ = sandboxExe
 
 	guestContext := "/workspace"
-	guestCache := "/ktl-cache"
-	sandboxExeGuest := filepath.Join(guestCache, "sandbox-bin", "ktl")
+	guestCache := "/verifier-cache"
+	sandboxExeGuest := filepath.Join(guestCache, "sandbox-bin", "verifier")
 
 	homeDir, _ := os.UserHomeDir()
 	binds := buildSandboxBinds(contextAbs, guestContext, cacheDir, guestCache, builderAddr, opts.SandboxBindHome, homeDir, opts.SandboxBinds)
@@ -222,7 +222,7 @@ func ensureSandboxExecutable(exePath, cacheDir string) (string, error) {
 	if err := os.MkdirAll(dir, 0o755); err != nil {
 		return "", fmt.Errorf("sandbox: create executable dir: %w", err)
 	}
-	target := filepath.Join(dir, "ktl")
+	target := filepath.Join(dir, "verifier")
 
 	in, err := os.Open(exePath)
 	if err != nil {

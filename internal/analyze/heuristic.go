@@ -63,7 +63,7 @@ func (a *HeuristicAnalyzer) Analyze(ctx context.Context, evidence *Evidence) (*D
 	}
 
 	d.RootCause = "Unknown issue."
-	d.Suggestion = "Review the full logs with 'ktl logs'."
+	d.Suggestion = "Review the full logs with 'verifier logs'."
 	return d, nil
 }
 

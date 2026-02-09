@@ -31,9 +31,9 @@ func TestResolveUnknown(t *testing.T) {
 
 func TestEnabledFromEnv(t *testing.T) {
 	env := []string{
-		"KTL_FEATURE_DEPLOY_PLAN_HTML_V3=1",
+		"VERIFIER_FEATURE_DEPLOY_PLAN_HTML_V3=1",
 		"SOME_OTHER=value",
-		"KTL_FEATURE_BOGUS=0",
+		"VERIFIER_FEATURE_BOGUS=0",
 	}
 	list := EnabledFromEnv(env)
 	flags, err := Resolve(list)
@@ -61,7 +61,7 @@ func TestContextHelpers(t *testing.T) {
 }
 
 func TestEnabledFromEnvUsesProcessEnv(t *testing.T) {
-	t.Setenv("KTL_FEATURE_DEPLOY_PLAN_HTML_V3", "true")
+	t.Setenv("VERIFIER_FEATURE_DEPLOY_PLAN_HTML_V3", "true")
 	list := EnabledFromEnv(nil)
 	if len(list) != 1 {
 		t.Fatalf("expected 1 env flag, got %d", len(list))
@@ -73,5 +73,5 @@ func TestEnabledFromEnvUsesProcessEnv(t *testing.T) {
 	if !flags.Enabled(FeatureDeployPlanHTMLV3) {
 		t.Fatalf("expected process env to enable flag")
 	}
-	os.Unsetenv("KTL_FEATURE_DEPLOY_PLAN_HTML_V3")
+	os.Unsetenv("VERIFIER_FEATURE_DEPLOY_PLAN_HTML_V3")
 }

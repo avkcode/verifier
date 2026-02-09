@@ -42,7 +42,7 @@ type Definition struct {
 var registry = map[Name]Definition{
 	FeatureDeployPlanHTMLV3: {
 		Name:        FeatureDeployPlanHTMLV3,
-		Description: "Switch ktl apply plan visualize output to the v3 UI components.",
+		Description: "Switch verifier apply plan visualize output to the v3 UI components.",
 		Stage:       StageExperimental,
 		Default:     false,
 	},
@@ -69,7 +69,7 @@ func Definitions() []Definition {
 	return defs
 }
 
-// Flags captures the resolved state of all feature flags for a ktl invocation.
+// Flags captures the resolved state of all feature flags for a verifier invocation.
 type Flags struct {
 	values map[Name]bool
 }
@@ -97,7 +97,7 @@ func (f Flags) EnabledNames() []Name {
 	return names
 }
 
-// EnvVar returns the environment variable that toggles the flag (e.g. KTL_FEATURE_DEPLOY_PLAN_HTML_V3).
+// EnvVar returns the environment variable that toggles the flag (e.g. VERIFIER_FEATURE_DEPLOY_PLAN_HTML_V3).
 func (d Definition) EnvVar() string {
 	return envVarForName(d.Name)
 }
@@ -125,14 +125,14 @@ func Resolve(sources ...[]string) (Flags, error) {
 	return Flags{values: values}, nil
 }
 
-// EnabledFromEnv scans the current environment (or the provided list) for KTL_FEATURE_* values.
+// EnabledFromEnv scans the current environment (or the provided list) for VERIFIER_FEATURE_* values.
 func EnabledFromEnv(environ []string) []string {
 	if environ == nil {
 		environ = os.Environ()
 	}
 	var enabled []string
 	for _, entry := range environ {
-		if !strings.HasPrefix(entry, "KTL_FEATURE_") {
+		if !strings.HasPrefix(entry, "VERIFIER_FEATURE_") {
 			continue
 		}
 		parts := strings.SplitN(entry, "=", 2)
@@ -142,7 +142,7 @@ func EnabledFromEnv(environ []string) []string {
 		if !isTruthy(parts[1]) {
 			continue
 		}
-		name := strings.TrimPrefix(parts[0], "KTL_FEATURE_")
+		name := strings.TrimPrefix(parts[0], "VERIFIER_FEATURE_")
 		name = strings.ReplaceAll(name, "_", "-")
 		name = strings.ToLower(name)
 		enabled = append(enabled, name)
@@ -195,7 +195,7 @@ func normalizeName(raw string) Name {
 func envVarForName(name Name) string {
 	upper := strings.ToUpper(string(name))
 	upper = strings.ReplaceAll(upper, "-", "_")
-	return "KTL_FEATURE_" + upper
+	return "VERIFIER_FEATURE_" + upper
 }
 
 func isTruthy(val string) bool {

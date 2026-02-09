@@ -10,7 +10,7 @@ import (
 	"time"
 
 	"verifier/internal/deploy"
-	apiv1 "verifier/pkg/api/ktl/api/v1"
+	apiv1 "verifier/pkg/api/verifier/api/v1"
 )
 
 // DeployApplyConfig mirrors the CLI flags needed to run a deploy apply.

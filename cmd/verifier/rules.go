@@ -19,7 +19,7 @@ func newVerifyRulesCommand(rulesPath *string) *cobra.Command {
 		Use:   "rules",
 		Short: "Browse available verify rules",
 		Long: strings.TrimSpace(`
-List or inspect the rule metadata shipped with ktl verify.
+List or inspect the rule metadata shipped with verifier verify.
 
 This is a discovery tool: it helps you understand rule meaning and severity,
 and it gives you stable rule IDs to use in selectors.
@@ -235,7 +235,7 @@ func loadRulesForCLI(rulesDir string, rulesPath *string) (verify.Ruleset, error)
 	if rulesPath != nil {
 		paths = append(paths, splitListLocal(*rulesPath)...)
 	}
-	if env := strings.TrimSpace(os.Getenv("KTL_VERIFY_RULES_PATH")); env != "" {
+	if env := strings.TrimSpace(os.Getenv("VERIFIER_VERIFY_RULES_PATH")); env != "" {
 		paths = append(paths, splitListLocal(env)...)
 	}
 	return verify.LoadRuleset(paths...)

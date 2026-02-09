@@ -14,7 +14,7 @@ import (
 
 	"verifier/internal/logging"
 	"verifier/internal/workflows/buildsvc"
-	apiv1 "verifier/pkg/api/ktl/api/v1"
+	apiv1 "verifier/pkg/api/verifier/api/v1"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/health"
 	healthpb "google.golang.org/grpc/health/grpc_health_v1"

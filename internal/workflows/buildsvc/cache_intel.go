@@ -681,7 +681,7 @@ func pathSize(path string) (int64, error) {
 
 func (c *cacheIntelCollector) snapshotPath(relDockerfile string) string {
 	key := sha256.Sum256([]byte(strings.ToLower(c.contextAbs) + "\n" + strings.ToLower(relDockerfile)))
-	dir := filepath.Join(c.cacheDir, "ktl-cache-intel")
+	dir := filepath.Join(c.cacheDir, "verifier-cache-intel")
 	return filepath.Join(dir, hex.EncodeToString(key[:])+".json")
 }
 

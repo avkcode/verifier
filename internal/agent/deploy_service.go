@@ -24,7 +24,7 @@ import (
 	"verifier/internal/api/convert"
 	"verifier/internal/deploy"
 	"verifier/internal/kube"
-	apiv1 "verifier/pkg/api/ktl/api/v1"
+	apiv1 "verifier/pkg/api/verifier/api/v1"
 )
 
 // DeployServer exposes deploy apply/destroy workflows over gRPC.

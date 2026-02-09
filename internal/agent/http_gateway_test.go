@@ -8,7 +8,7 @@ import (
 	"testing"
 	"time"
 
-	apiv1 "verifier/pkg/api/ktl/api/v1"
+	apiv1 "verifier/pkg/api/verifier/api/v1"
 )
 
 func TestHTTPGateway_ListSessions_Auth(t *testing.T) {
@@ -18,7 +18,7 @@ func TestHTTPGateway_ListSessions_Auth(t *testing.T) {
 		Producer:  "p",
 		Payload:   &apiv1.MirrorFrame_Raw{Raw: []byte("x")},
 	})
-	_ = mirror.UpsertSessionMeta(context.Background(), "s1", MirrorSessionMeta{Command: "ktl logs"}, map[string]string{"team": "infra"})
+	_ = mirror.UpsertSessionMeta(context.Background(), "s1", MirrorSessionMeta{Command: "verifier logs"}, map[string]string{"team": "infra"})
 
 	h := newHTTPGateway("secret", mirror)
 
@@ -45,7 +45,7 @@ func TestHTTPGateway_ListSessions_Auth(t *testing.T) {
 		if !strings.Contains(body, "\"session_id\":\"s1\"") {
 			t.Fatalf("expected session id in response, got %s", body)
 		}
-		if !strings.Contains(body, "\"command\":\"ktl logs\"") {
+		if !strings.Contains(body, "\"command\":\"verifier logs\"") {
 			t.Fatalf("expected command in response, got %s", body)
 		}
 		if !strings.Contains(body, "\"team\":\"infra\"") {
@@ -75,8 +75,8 @@ func TestHTTPGateway_CookieAuth(t *testing.T) {
 			t.Fatalf("login: got status %d want %d body=%s", rr.Code, http.StatusNoContent, rr.Body.String())
 		}
 		raw := rr.Header().Get("Set-Cookie")
-		if !strings.Contains(raw, "ktl_token=") {
-			t.Fatalf("expected Set-Cookie to include ktl_token, got %q", raw)
+		if !strings.Contains(raw, "verifier_token=") {
+			t.Fatalf("expected Set-Cookie to include verifier_token, got %q", raw)
 		}
 		cookie = strings.TrimSpace(strings.Split(raw, ";")[0])
 	}

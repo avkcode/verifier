@@ -57,7 +57,7 @@ func TestVerifyArchive_DetectsTamper(t *testing.T) {
 		t.Fatalf("open sqlite: %v", err)
 	}
 	t.Cleanup(func() { _ = db.Close() })
-	if _, err := db.Exec(`UPDATE ktl_chart_files SET data = ? WHERE path = 'values.yaml'`, []byte("tampered\n")); err != nil {
+	if _, err := db.Exec(`UPDATE verifier_chart_files SET data = ? WHERE path = 'values.yaml'`, []byte("tampered\n")); err != nil {
 		t.Fatalf("tamper: %v", err)
 	}
 
