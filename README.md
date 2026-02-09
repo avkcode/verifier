@@ -16,6 +16,10 @@ Verifier is a powerful CLI tool designed to validate Kubernetes configurations, 
 
 Unlike standard linters, Verifier offers a comprehensive workflow that bridges the gap between static analysis and live cluster state. It doesn't just check syntax; it validates security posture, resource limits, and best practices with a built-in policy engine.
 
+## Sample Report
+
+![HTML Report](verify.png)
+
 ## Quick Start
 
 ### Verify a Helm Chart
