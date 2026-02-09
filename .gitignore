@@ -1,1 +1,5 @@
 bin/
+demo.tape
+*.gif
+*.html
+*.yaml
